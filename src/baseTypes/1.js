@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var age = 50;
+var name = 'Max';
+var toggle = true;
+var empty = null;
+var notInitialize;
+var callback = function (a) { return 100 + a; };
+var result = callback(100);
+var callback1 = function (a) { return 100 + a; };
+var res1 = callback1('a');

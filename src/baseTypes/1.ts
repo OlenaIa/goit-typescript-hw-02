@@ -11,7 +11,12 @@ let toggle: toggle = true;
 let empty: empty = null;
 let notInitialize: notInitialize;
 let callback = (a: number): number => { return 100 + a };
-
 const result = callback(100);
+
+// Second version
+
+let callback1 = (a: string): string => { return 100 + a };
+const res1 = callback1('a');
+
 
 export {};
