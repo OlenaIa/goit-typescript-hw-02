@@ -3,7 +3,7 @@
   Доповніть цю функцію, використовуючи generics, щоб вона повертала правильний тип.
 */
 
-function getPromise <T>():T  {
+function getPromise ():Promise<[string, number]>  {
   return new Promise((resolve) => {
     resolve(['Text', 50]);
   });
