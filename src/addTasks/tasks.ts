@@ -237,21 +237,138 @@ const privatUser2: privateUser = {
     b: 5,
 };
 
-//Задача 2: Ви хочете створити новий тип на основі API-відповіді, але без дати створення.
 
 // Робота з інтерфейсами
 
-// Спроєктуйте інтерфейс для ресторанного меню.
+// 1. Спроєктуйте інтерфейс для ресторанного меню.
 // Він повинен містити поля: назва, ціна, категорія(наприклад, закуска, основна страва, десерт).
-// Розробіть функцію, яка приймає список страв і фільтрує їх за категорією.
+// Розробіть функцію, яка приймає список страв і фільтрує їх за категорією.\
 
-// Спроєктуйте інтерфейс для користувача з полями ім'я, email та дата народження.
+interface IMenu {
+    title: string;
+    price: number;
+    category: 'breakfast' | 'lunch' | 'dinner';
+}
+
+const friedEgg: IMenu = {
+    title: 'friedEgg',
+    price: 40,
+    category: 'breakfast'
+};
+
+const tost: IMenu = {
+    title: 'tost',
+    price: 20,
+    category: 'breakfast'
+};
+
+const friedPotato: IMenu = {
+    title: 'friedPotato',
+    price: 20,
+    category: 'lunch'
+};
+
+const friedMeat: IMenu = {
+    title: 'friedMeat',
+    price: 100,
+    category: 'dinner'
+};
+
+const cake: IMenu = {
+    title: 'cake',
+    price: 200,
+    category: 'dinner'
+};
+
+function filterCategory(category: string, ...params: IMenu[]): void {
+    const chooseCategoryDish = params.filter(item => item.category === category);
+        console.log(`choose dish in ${category} =>`, chooseCategoryDish);
+
+};
+
+filterCategory('breakfast', friedMeat, friedPotato, cake, friedEgg, tost);
+filterCategory('dinner', friedMeat, friedPotato, cake, friedEgg, tost);
+
+
+
+// 2. Спроєктуйте інтерфейс для користувача з полями ім'я, email та дата народження.
 // Після цього створіть функцію, яка перевіряє, чи є користувач повнолітнім.
+
+interface IUser {
+    name: string;
+    email: string;
+    birthDate: Date;
+};
+
+function isAdult(user: IUser): void {
+    const today: Date = new Date();
+    const age: number = today.getFullYear() - user.birthDate.getFullYear();
+    const adult: number = 18;
+    if (age > adult) {
+        console.log(`User ${user.name} is an adult`);
+        return;
+    }
+    console.log(`User ${user.name} is a child`);
+}
+
+const bob: IUser = {
+    name: 'Bob',
+    email: 'string',
+    birthDate: new Date('1981-01-20'),
+};
+
+const vera: IUser = {
+    name: 'Vera',
+    email: 'string',
+    birthDate: new Date('2015-01-20'),
+};
+
+isAdult(vera);
+isAdult(bob);
+
 
 // Робота з класами
 
-// Спроєктуйте інтерфейс CarProperties з такими характеристиками, як brand, year та fuelType.
+// 1. Спроєктуйте інтерфейс CarProperties з такими характеристиками, як brand, year та fuelType.
 // Створіть клас Car, який реалізує цей інтерфейс і має метод getDetails(), що виводить інформацію про автомобіль.
 
-// Спроєктуйте інтерфейс StudentData з полями name, studentID та major.
+interface ICarProperties {
+    brand: string;
+    year: Date;
+    fuelType: 'petrol' | 'gasoline';
+};
+
+class Car implements ICarProperties{
+    constructor(public brand: string, public year: Date, public fuelType: 'petrol' | 'gasoline') {}
+    
+    getDetails(): void {
+        console.log(`Car of ${this.brand} brand. ${this.year.getFullYear()}. Fuel: ${this.fuelType}` );
+    }
+}
+
+const mers = new Car('Mers', new Date('2020-01-01'), 'gasoline');
+mers.getDetails();
+
+
+// 2. Спроєктуйте інтерфейс StudentData з полями name, studentID та major.
 // Створіть клас Student, який реалізує цей інтерфейс і має метод introduce(), де студент представляється.
+
+interface IStudentData {
+    name: string;
+    studentID?: number;
+    major: boolean;
+};
+
+class Student implements IStudentData {
+    constructor(public name: string, public major: boolean) { }
+    
+    introduce(): void {
+        console.log(`Hi! My name id ${this.name}`);
+    }
+};
+
+const mary = new Student('Mary', true);
+const john = new Student('John', false)
+
+console.log(mary.introduce());
+console.log(john.introduce());
